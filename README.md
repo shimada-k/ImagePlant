@@ -23,4 +23,5 @@
 
 ## 使い方
 `cd path/to/image/directories`
+
 `ruby ImagePlant.rb`
