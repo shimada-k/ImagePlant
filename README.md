@@ -25,3 +25,7 @@
 `cd path/to/image/directories`
 
 `ruby ImagePlant.rb`
+
+スクリプトを実行したカレントの直下に`./dst`が作られるのでそこにソート済みファイルが出来上がります
+
+ソート後のファイル名は1.jpg,2.jpg,3.jpg...となります
