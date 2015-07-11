@@ -3,7 +3,7 @@
 require 'fileutils'
 
 DST_DIR    = "./dst"
-TMP_DIR     = "./tmp"
+TMP_DIR     = "./.tmp"
 
 #----------------------------------------------
 # 命名規則は違えどディレクトリ内では
@@ -11,7 +11,7 @@ TMP_DIR     = "./tmp"
 #----------------------------------------------
 
 class ImagePlant
-    
+
     def initialize()
         FileUtils.rm_rf(TMP_DIR)
         FileUtils.mkdir_p(TMP_DIR)
@@ -31,8 +31,7 @@ class ImagePlant
         end
 
         if !Dir.exist?(srcDir) then
-            puts 'Error: non exist dir'
-            puts 'make \'src\' directory first or specify valid directory'
+            usage()
             exit()
         end
 
@@ -54,6 +53,12 @@ class ImagePlant
         }
         @srcInfo = srcInfo
         #p @srcInfo
+    end
+
+    def usage()
+        puts 'make \'src\' directory first or specify valid directory'
+        puts 'USAGE :'
+        puts '  ruby ' + __FILE__ + ' [PATH TO SRC DIR]'
     end
 
     def normalize(dir)
@@ -130,7 +135,7 @@ class ImagePlant
       }
 
       # 準正規化されたファイルを結合する
-      self.phase1Union()    # 名前が衝突は残して結合
+      self.phase1Union()    # 名前の衝突は残して結合
       self.phase2Union()    # 名前の衝突を解決する
       self.cleanup()
     end
