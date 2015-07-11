@@ -2,10 +2,13 @@
 
 require 'fileutils'
 
-SRC_DIR    = "./src"
-
 DST_DIR    = "./dst"
 TMP_DIR     = "./tmp"
+
+#----------------------------------------------
+# 命名規則は違えどディレクトリ内では
+# ソートされているファイルをまとめるスクリプト
+#----------------------------------------------
 
 class ImagePlant
     
@@ -21,13 +24,25 @@ class ImagePlant
         srcInfo['total'] = 0
         srcInfo['dir'] = Hash.new()
 
-        Dir.foreach(SRC_DIR){|dir|
+        if ARGV[0] then
+            srcDir = ARGV[0]
+        else
+            srcDir = './src'
+        end
+
+        if !Dir.exist?(srcDir) then
+            puts 'Error: non exist dir'
+            puts 'make \'src\' directory first or specify valid directory'
+            exit()
+        end
+
+        Dir.foreach(srcDir){|dir|
             if dir[0,1] == '.' then
                 next
             end
             # puts dir
             count = 0
-            dirPath = SRC_DIR + '/' + dir
+            dirPath = srcDir + '/' + dir
             for f in Dir.open(dirPath).sort do
                 # puts f
                 if f[0,1] != '.' then
